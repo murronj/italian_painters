@@ -6,3 +6,7 @@ https://fr.wikipedia.org/wiki/Cat%C3%A9gorie:Femme_peintre_du_XVIIe_si%C3%A8cle
 
 - le XVIIe siècle: contexte historique
 https://fr.wikipedia.org/wiki/XVIIe_si%C3%A8cle
+
+- 17th century painters
+https://en.wikipedia.org/wiki/Category:17th-century_painters
+
