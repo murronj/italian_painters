@@ -8,3 +8,10 @@ Ce projet à pour objectif d'étudier les différentes relations entre les peint
 
 ## Création de la base de donnée
 * [Modèle conceptuel](MCD_peintres_17e.drawio)
+* [Commentaire du modèle conceptuel](commentaire_MCD.md)
+* [Modèle relationnel](modele_relationnel.md)
+
+## Récupération et analyse de données existantes
+* [Explorer DBpedia](explorer_DBpedia.md)
+* [Importer les données de DBpedia](importer_donnees_DBpedia.md)
+* [Visualiser les données de DBpedia](visualiser_donnees_DBpedia.md)
