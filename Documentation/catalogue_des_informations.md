@@ -1,30 +1,33 @@
 # Catalogue des informations
+
 ## Objets et propriétés
+
 ### Personne
 - nom
 - date de naissance
+- date de décès
 - lieu de naissance
-- origine géographique
+- lieu de décès
 - formation
 - activités professionnelles
-- affiliation religieuse
-- affiliation politique
+- statut social
+- genre
 
 ### Organisations
 - nom
-- type (artistique, littéraire, politique, philosophique, etc.)
+- définition
 - siège
 - durée d'activité
 
 ### Oeuvres
-- technique (peinture à l'huile, gravure, dessin, fresque, etc.)
-- style (paysage, portrait, marine, nature morte, scène historique, mythologie, profane/sacré)
+- titre
+- auteur
 - année de production
-- commanditaire (s'il y en a un)
+- lieu de conservation
 
 ### Lieux
 - nom
-- type (lieu de rassemblement, lieu de formation, lieu de production artistique, etc.)
+- type (lieu de naissance, de décès, ou siège d'une organisation)
 
 ## Relation entre objets
 - entre personnes nées dans le même lieu

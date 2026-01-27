@@ -9,10 +9,14 @@ Pour la classe "Person", les propriétés suivantes seront inclues:
 - leur date de naissance
 - leur date de décès
 - leur genre 
+- notes
+- definition (notice wikipédia)
+- fk_social_status
+
 L'inclusion de la propriété "genre" est nécessaire car l'une des questions de recherche s'intéresse à la prévalence des femmes peintre et si elles partagent des caractéristiques ou des relations particulières.
 
 ### Relations 
-La table "Person" entretient des relations avec les tables: "Training" par voie de "Studies", "Occupation" par voie de "Pursuit", "Geographical Place", "Organisation" par voie de "Membership", "Artwork", "Social Status", et "Movement" par voie de "Affiliation".
+La table "Person" entretient des relations avec les tables: "Training" par voie de "Studies", "Occupation" par voie de "Pursuit", "Geographical Place" par voie de "PersonPlace, "Organisation" par voie de "Membership", "Artwork", "Social Status", et "Movement" par voie de "Affiliation".
 
 Les relations qu'entretient la class "Person" avec d'autres classes sont les suivantes:
 - relation person-geographical place : ceci sera généralement un lieu de naissance ou de décès.
@@ -27,8 +31,8 @@ Les relations qu'entretient la class "Person" avec d'autres classes sont les sui
 La classe "Training" désigne la formation qu'a effectué l'individu. On la prend en compte car nous souhaitons tout d'abord savoir si les peintres traités dans ce projet possèdent une formation artistique, et s'ils ont potentiellement effectués d'autres formations.
 
 ### Propriétés
-- le nom de la formation (ex. peintre, verrier, marchand, etc.)
-- la date 
+- le nom de la formation (ex. painter, law, sculptor, economics, etc.)
+- le type (s'il s'agit d'un apprentissage, d'une university, d'une école, etc.)
 
 ### Relations
 La table "Training" fait lien avec la table "Studies" afin de montrer la relation avec "Person" et montrer la formation qu'a effectué la personne. 
@@ -44,18 +48,19 @@ La classe "Occupation" s'intéresse aux métiers exercés par les individus étu
 La table "Occupation" a une relation avec la table "Person" au travers de "Pursuit" comme il s'agit d'individu exerçant un/des métier(s).
 
 ## Organisation
-Cette classe désigne une groupe organisé de personne partageant des intérêts similaires. La nature de l'organisation peut varier: il peut s'agir d'académies, d'instituts, d'un groupe politique/philosophique/littéraire/artistique, etc. pour autant que cette affiliation soit formelle.
+Cette classe désigne un groupe organisé de personne partageant des intérêts similaires. La nature de l'organisation peut varier: il peut s'agir d'académies, d'instituts, d'un groupe politique/philosophique/littéraire/artistique, etc. pour autant que cette affiliation soit formelle.
 
 ### Propriétés
 - le nom
 - la définition (institut, académie, etc.)
 - start_date (la date de fondation)
+- fk_geographical_place (siège)
 
 ### Relations
 La table "Organisation" possède une relation avec "Geographical Place" car les organisations sont généralement basée dans une ville précise. De plus, elle est liée à la table relationnelle "Membership" qui fait le lien avec la "Person" et signifie une appartenance.
 
 ## Membership
-La table "Membership" est une table relationnelle, un classe temporelle qui désigne l'appartenance formelle.
+La table "Membership" est une table relationnelle, un classe temporelle qui désigne l'appartenance formelle d'un individu à une organisation. 
 
 ### Propriétés
 - fk_person
@@ -64,51 +69,42 @@ La table "Membership" est une table relationnelle, un classe temporelle qui dés
 - date_end
 
 ### Relations
-Comme son nom (table relationnelle) l'indique, "Membership" fait office de lien tangible entre les tables "Person" et "Organisation". 
+Comme son nom (table relationnelle) l'indique, "Membership" fait office de lien tangible entre les tables "Person" et "Organisation". Elle a été créer car un seul individu peut appartenir à plusieurs organisations, ainsi cette table permet d'identifier chacun des liens d'appartenance.
 
 ## Geographical place
 Cette classe englobe tous les lieux importants. Il peut désigner un lieu de: naissance, de décès, le siège d'une organisation, conservation d'une oeuvre, etc. 
 
 ### Propriétés
 - le nom
-- le type (c'est-à-dire s'il s'agit d'un lieu de naissance (birth), de décès (death), de conservation (conservation), ou le siège d'une organisation (establishment))
+- le type (p. ex. ville, village, etc.)
 
 ### Relations
-Cette table entretient plusieurs relations avec les autres classes mentionnées ("Person", "Organisation" et "Artwork"). Concernant nos questions de recherche, le lieu est important car nous espérons trouver un impact entre le lieu de résidence d'un peintre et les relations qu'il entretient (ou non) avec d'autres individus ayant vécu au même endroit, ou alors une organisation qui siège dans la même ville, etc.
+Cette table entretient plusieurs relations avec les autres classes mentionnées ("PersonPlace", "Organisation" et "Artwork"). Concernant nos questions de recherche, le lieu est important car nous espérons trouver un impact entre le lieu de conservation d'une oeuvres et leur circulation dans le monde, le siège d'une organisation, etc. Elle montre aussi la circulation d'un individu durant sa vie (p. ex. en cas d'émigration).
 
 ## Artwork
-Cette table désigne les oeuvres des peintres étudiés. 
+Cette table désigne les oeuvres des peintres étudiés. Il est possible de lister plusieurs oeuvre différentes du même artiste.
 
 ### Propriétés
-- le nom (à savoir le titre)
+- le titre
 - la date 
+- fk_geographical_place (lieu de conservation)
+- fk_person (auteur)
 
 ### Relations
 Cette table est liée à "Person" et désigne donc le créateur de l'oeuvre et à "Geographical Place" désignant son lieu de conservation ce qui est pertinent car peut donner des indications sur la circulation d'oeuvres italiennes.
 
 ## Movement
-Cette classe désigne le courant artistique auquel appartient l'artiste. Elle est nécessaire car nous désirons savoir si les peintres d'un même courant entretiennent des relations plus étroites ou s'ils partagent plus de caractéristique que deux peintres n'appartenant pas au même courant. De plus, nous espérons remarquer une évolution selon les périodes historiques.
+Cette classe désigne le courant artistique auquel appartient l'artiste. Elle est nécessaire car nous désirons savoir si les peintres d'un même courant entretiennent des relations plus étroites ou s'ils partagent plus de caractéristiques que deux peintres n'appartenant pas au même courant. De plus, nous espérons remarquer une évolution selon les périodes historiques.
 
 ### Propriétés
 - le nom (ex. baroque)
 - la définition (une brève description du courant et ses caractéristiques)
 - date_start
 - date_end
+- notes
 
 ### Relations
-Cette table est liée à la table "Person" (par la table "Affiliation") afin d'identifier à quel courant artisitque le peintre appartenait. Nous l'avons également liée à la table "Period" afin de spécifier la période à laquelle le courant artistique appartient.
-
-## Period
-Comme la liste étudiée concerne tous les peintres italiens, toutes périodes confondues, nous avons juger nécessaire d'ajouter cette table afin d'avoir une vue chronologique. Nous espérons voir émerger une évolution et les éventuels chevauchements des courants artistique dans l'histoire de la peinture italienne.
-
-### Propriétés
-- le nom (p. ex. siècle)
-- date de début
-- date de fin
-- la définition
-
-### Relations
-Au vue de nos intérêts, nous avons liée cette table à "Movement" afin d'établir une chronologie plus claire.
+Cette table est liée à la table "Person" (par la table "Affiliation") afin d'identifier à quel courant artisitque le peintre appartenait. 
 
 ## Social Status
 Le statut social semble important lorsque l'on considère que la profession de peintre n'a pas toujours été accessible à tous. Ainsi, nous espérons découvrir certains parrallèles ou certaines divergences selon le statut social des peintres étudiés. Comme nous étudions un large pan historique, il est nécessaire de normaliser la nomenclature afin d'éviter l'usage de termes anachroniques. Ainsi, nous proposons d'utiliser les termes suivants: milieu défavorisé (très peu de moyens financiers), milieu modeste (marchands, commerçants, classe moyenne), milieu privilégié (aristocratie, bourgeoisie, noblesse). Comme nous nous intéressons particulièrement au statut social dont sont issus les individus, nous ne prenons que le contexte de base/familial et écartons les fluctuations du statut durant la vie de l'individu (p. ex. un peintre issu d'un milieu défavorisé, mais qui meurt riche = nous prenons en compte le milieu défavorisé). Nous justifions cela par le fait que nos questions de recherche s'intéressent notamment à l'accessibilité à la profession selon le statut social initial de l'individu.
@@ -151,7 +147,18 @@ La table "Studies" désigne l'acte d'acquérir une formation spécifique.
 - fk_person
 - fk_training
 - start_date
-- end_date
+- notes
 
 ### Relations
 Cette classe relie les tables "Person" à "Training" en montrant l'acquisition de connaissances qui mène à une formation concrète. Il a été jugé nécessaire de créer cette table car une personne peut avoir plusieurs formations et une formation regroupe plusieurs personnes. Ainsi, nous montrons un lien entre une personne et une formation. 
+
+## Person Place
+Cette table recueille les lieux de naissance et de décès de chaque personnes étudiées.
+
+### Propriétés
+- fk_person
+- fk_geographical_place
+- role (lieu de naissance ou de décès)
+
+### Relations
+Cette table est liée d'une part à "Person" et d'autre part à "Geographical Place". Nous avons dû la rajouter car on voulait avoir le lieu de naissance et de décès pour chaque individu, un lien direct n'étant donc pas possible.
